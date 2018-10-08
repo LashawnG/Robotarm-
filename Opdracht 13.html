@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Robotarm opdracht 13</title>
-	<meta charset="utf-8">
+    <title>Robotarm opdracht 13</title>
+    <meta charset="utf-8">
 </head>
 <body>
         <canvas id="canvas" width="800" height="600"></canvas>
@@ -13,32 +13,31 @@
             var robotArm = new RobotArm(canvas);
             var right = 1
             var left = 1
-            var stop = 10
+            var color = true; 
             
             // Het level inladen
              robotArm.randomLevel( 1, 8);
             
             // Jou instructies volgen hier
-             
-            for (i = 0; i < stop; i++) {
                 robotArm.grab();
-                if (robotArm.scan() == "red" || robotArm.scan() == "blue" ||  robotArm.scan() == "green"|| robotArm.scan() == "white") {
-                robotArm.grab();
-                    for (a = 0; a < right; a++) {
-                        robotArm.moveRight();
+                while(color == true) {
+                    if (robotArm.scan() == null) {
+                        color = false
+                    } 
+                    else {
+                        for (a = 0; a < right; a++) {
+                            robotArm.moveRight();
+                        }
+                        robotArm.drop();
+                        for (a = 0; a < left; a++) {
+                            robotArm.moveLeft();
+                        }
+                        robotArm.grab();
+                        right++
+                        left++
                     }
-                    robotArm.drop();
-                    for (a = 0; a < left; a++) {
-                        robotArm.moveLeft();
-                    }
-                    right++
-                    left++
-                }
-                else {
-                    stop = 0
-                    console.log("Stopped");   
-                }   
-            }
+                } 
+                  
             // De door jou opgegeven instructies uitvoeren
             robotArm.run();
         </script>
